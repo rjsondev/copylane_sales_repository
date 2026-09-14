@@ -23,19 +23,21 @@ namespace CopylaneSalesInventory.Infrastructure.Persistence.Configurations
                 .IsUnique();
 
             builder.Property(p => p.BarCode)
-                .HasMaxLength(100);
-
-            builder.HasIndex(p => p.BarCode)
-                .IsUnique()
-                .HasFilter("[BarCode] IS NOT NULL AND [BarCode] != ''"); // Allows empty/null entries if optional
+                .HasColumnType("nvarchar(MAX)")
+                .IsRequired(false);
 
             // 4. Content Properties
             builder.Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(250);
 
+            builder.Property(p => p.Description)
+                .HasMaxLength(250)
+                .IsRequired(false);
+
             builder.Property(p => p.UnitPrice)
-                .HasPrecision(18, 2);
+                .HasPrecision(18, 2)
+                .IsRequired(false);
 
             builder.Property(p => p.IsActive)
                 .HasDefaultValue(true);
