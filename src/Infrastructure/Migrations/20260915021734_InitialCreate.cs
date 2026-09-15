@@ -11,8 +11,12 @@ namespace CopylaneSalesInventory.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Reference");
+
             migrationBuilder.CreateTable(
                 name: "Product",
+                schema: "Reference",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -39,6 +43,7 @@ namespace CopylaneSalesInventory.Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_Sku",
+                schema: "Reference",
                 table: "Product",
                 column: "Sku",
                 unique: true);
@@ -48,7 +53,8 @@ namespace CopylaneSalesInventory.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Product",
+                schema: "Reference");
         }
     }
 }

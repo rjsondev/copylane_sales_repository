@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CopylaneSalesInventory.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20260914115318_InitialCreate")]
+    [Migration("20260915021734_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -88,7 +88,7 @@ namespace CopylaneSalesInventory.Infrastructure.Migrations
                     b.HasIndex("Sku")
                         .IsUnique();
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("Product", "Reference");
                 });
 #pragma warning restore 612, 618
         }
