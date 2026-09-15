@@ -9,7 +9,7 @@ namespace CopylaneSalesInventory.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             // 1. Table Mapping
-            builder.ToTable("Product");
+            builder.ToTable("Product", "Reference");
 
             // 2. Keys & Identity
             builder.HasKey(p => p.Id);
