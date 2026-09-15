@@ -1,21 +1,22 @@
-﻿using CopylaneSalesInventory.Domain.Entities;
+﻿using CopylaneSalesInventory.Application.Common.Interfaces;
+using CopylaneSalesInventory.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CopylaneSalesInventory.Infrastructure.Persistence
+namespace CopylaneSalesInventory.Infrastructure.Persistence;
+
+public class AppDBContext : DbContext, IApplicationDbContext
 {
-    public sealed class AppDBContext : DbContext
-    {
-        public AppDBContext(DbContextOptions<AppDBContext> options)
+    public AppDBContext(
+        DbContextOptions<AppDBContext> options)
         : base(options)
-        {
-        }
+    {
+    }
 
-        public DbSet<Product> Products => Set<Product>();
+    public DbSet<Product> Product => Set<Product>();
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(
-                typeof(AppDBContext).Assembly);
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(
+            typeof(AppDBContext).Assembly);
     }
 }
