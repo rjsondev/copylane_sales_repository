@@ -85,7 +85,7 @@ namespace CopylaneSalesInventory.Infrastructure.Migrations
                     b.HasIndex("Sku")
                         .IsUnique();
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("Product", "Reference");
                 });
 #pragma warning restore 612, 618
         }
