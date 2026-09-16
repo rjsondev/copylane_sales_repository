@@ -7,6 +7,5 @@ public interface IApplicationDbContext
 {
     DbSet<Product> Product { get; }
 
-    Task<int> SaveChangesAsync(
-        CancellationToken cancellationToken);
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
