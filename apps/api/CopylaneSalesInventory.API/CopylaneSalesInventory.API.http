@@ -3,4 +3,15 @@
 GET {{CopylaneSalesInventory.API_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+### Create a New Product
+POST {{CopylaneSalesInventory.API_HostAddress}}/api/products
+Content-Type: application/json
+{
+  "sku": "LAPTOP-002",
+  "barcode": "laptop-002",
+  "name": "Gaming Laptop Asus",
+  "description": "Gaming laptop Asus",
+  "unitprice": 45030,
+  "reorderlevel": 5,
+  "createdbyid": 1
+}
