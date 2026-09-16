@@ -1,4 +1,5 @@
 ﻿using CopylaneSalesInventory.Application.Products.Commands.CreateProduct;
+using CopylaneSalesInventory.Application.Products.Commands.SetProductStatus;
 using CopylaneSalesInventory.Application.Products.Commands.UpdateProduct;
 using MediatR;
 
@@ -12,6 +13,7 @@ public static class ProductEndpoints
 
         group.MapPost("/", CreateProduct);
         group.MapPut("/{id:int}", UpdateProduct);
+        group.MapPatch("/{id:int}/status", SetProductStatus);
 
         return app;
     }
@@ -23,16 +25,26 @@ public static class ProductEndpoints
         return Results.Created($"/api/product/{productId}", new { id = productId });
     }
 
-    private static async Task<IResult> UpdateProduct(int id, UpdateProductCommand command, ISender sender,CancellationToken cancellationToken)
+    private static async Task<IResult> UpdateProduct(int id, UpdateProductCommand command, ISender sender, CancellationToken cancellationToken)
     {
         if (id != command.Id)
         {
             return Results.BadRequest();
         }
 
-        await sender.Send(
-            command,
-            cancellationToken);
+        await sender.Send(command, cancellationToken);
+
+        return Results.NoContent();
+    }
+
+    private static async Task<IResult> SetProductStatus(int id, SetProductStatusCommand command, ISender sender, CancellationToken cancellationToken)
+    {
+        if (id != command.Id)
+        {
+            return Results.BadRequest();
+        }
+
+        await sender.Send(command, cancellationToken);
 
         return Results.NoContent();
     }
