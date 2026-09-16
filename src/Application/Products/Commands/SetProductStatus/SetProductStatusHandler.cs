@@ -14,9 +14,7 @@ public sealed class SetProductStatusHandler
         _dbContext = dbContext;
     }
 
-    public async Task Handle(
-        SetProductStatusCommand request,
-        CancellationToken cancellationToken)
+    public async Task Handle(SetProductStatusCommand request, CancellationToken cancellationToken)
     {
         var product = await _dbContext.Product.FirstOrDefaultAsync(
             x => x.Id == request.Id,

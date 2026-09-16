@@ -1,6 +1,7 @@
 ﻿using CopylaneSalesInventory.Application.Products.Commands.CreateProduct;
 using CopylaneSalesInventory.Application.Products.Commands.SetProductStatus;
 using CopylaneSalesInventory.Application.Products.Commands.UpdateProduct;
+using CopylaneSalesInventory.Application.Products.Queries.GetProducts;
 using MediatR;
 
 namespace CopylaneSalesInventory.API.Features.Products;
@@ -14,9 +15,12 @@ public static class ProductEndpoints
         group.MapPost("/", CreateProduct);
         group.MapPut("/{id:int}", UpdateProduct);
         group.MapPatch("/{id:int}/status", SetProductStatus);
+        group.MapGet("/", GetProducts);
 
         return app;
     }
+
+    #region Mapped Method Endpoints
 
     private static async Task<IResult> CreateProduct(CreateProductCommand command, ISender sender, CancellationToken cancellationToken)
     {
@@ -48,4 +52,13 @@ public static class ProductEndpoints
 
         return Results.NoContent();
     }
+
+    private static async Task<IResult> GetProducts(ISender sender, CancellationToken cancellationToken)
+    {
+        var products = await sender.Send(new GetProductsQuery(), cancellationToken);
+
+        return Results.Ok(products);
+    }
+
+    #endregion
 }
