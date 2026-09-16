@@ -38,3 +38,6 @@ Content-Type: application/json
   "isactive": false,
   "modifiedbyid": 2
 }
+
+### Get Products
+GET {{CopylaneSalesInventory.API_HostAddress}}/api/product
