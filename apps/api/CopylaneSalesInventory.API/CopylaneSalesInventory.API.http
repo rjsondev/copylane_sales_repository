@@ -4,14 +4,28 @@ GET {{CopylaneSalesInventory.API_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ### Create a New Product
-POST {{CopylaneSalesInventory.API_HostAddress}}/api/products
+POST {{CopylaneSalesInventory.API_HostAddress}}/api/product
 Content-Type: application/json
 {
-  "sku": "LAPTOP-002",
-  "barcode": "laptop-002",
-  "name": "Gaming Laptop Asus",
-  "description": "Gaming laptop Asus",
-  "unitprice": 45030,
+  "sku": "LAPTOP-001",
+  "barcode": "laptop-001",
+  "name": "Gaming Laptop",
+  "description": "Gaming laptop",
+  "unitprice": 55000,
   "reorderlevel": 5,
   "createdbyid": 1
+}
+
+### Update Product
+PUT {{CopylaneSalesInventory.API_HostAddress}}/api/product/1
+Content-Type: application/json
+{
+  "id": 1,
+  "sku": "LAPTOP-001x",
+  "barcode": "laptop-001x",
+  "name": "Gaming Laptop X",
+  "description": "Gaming laptop X",
+  "unitprice": 55000,
+  "reorderlevel": 10,
+  "modifiedbyid": 2
 }
