@@ -1,11 +1,11 @@
-﻿using CopylaneSalesInventory.Application.Common.Interfaces;
+﻿using CopylaneSalesInventory.Application.Common.Exceptions;
+using CopylaneSalesInventory.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace CopylaneSalesInventory.Application.Products.Commands.UpdateProduct;
 
-public sealed class UpdateProductHandler
-    : IRequestHandler<UpdateProductCommand>
+public sealed class UpdateProductHandler : IRequestHandler<UpdateProductCommand>
 {
     private readonly IApplicationDbContext _dbContext;
 
@@ -14,9 +14,7 @@ public sealed class UpdateProductHandler
         _dbContext = dbContext;
     }
 
-    public async Task Handle(
-        UpdateProductCommand request,
-        CancellationToken cancellationToken)
+    public async Task Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var product = await _dbContext.Product.FirstOrDefaultAsync(
             x => x.Id == request.Id,
@@ -24,8 +22,7 @@ public sealed class UpdateProductHandler
 
         if (product is null)
         {
-            throw new KeyNotFoundException(
-                $"Product {request.Id} was not found.");
+            throw new NotFoundException($"Product {request.Id} was not found.");
         }
 
         var duplicateSku = await _dbContext.Product.AnyAsync(
@@ -35,8 +32,7 @@ public sealed class UpdateProductHandler
 
         if (duplicateSku)
         {
-            throw new InvalidOperationException(
-                $"Product SKU '{request.Sku}' already exists.");
+            throw new ConflictException($"Product SKU '{request.Sku}' already exists.");
         }
 
         product.Sku = request.Sku;
