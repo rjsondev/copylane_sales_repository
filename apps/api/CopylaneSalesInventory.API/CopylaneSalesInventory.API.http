@@ -11,7 +11,7 @@ Content-Type: application/json
   "barcode": "laptop-001",
   "name": "Gaming Laptop",
   "description": "Gaming laptop",
-  "unitprice": -10,
+  "unitprice": 45000,
   "reorderlevel": 5,
   "createdbyid": 1
 }
@@ -21,10 +21,10 @@ PUT {{CopylaneSalesInventory.API_HostAddress}}/api/product/1
 Content-Type: application/json
 {
   "id": 1,
-  "sku": "LAPTOP-001x",
-  "barcode": "laptop-001x",
-  "name": "Gaming Laptop X",
-  "description": "Gaming laptop X",
+  "sku": "LAPTOP-001",
+  "barcode": "laptop-001",
+  "name": "Gaming Laptop",
+  "description": "Gaming laptop",
   "unitprice": 55000,
   "reorderlevel": 10,
   "modifiedbyid": 2
