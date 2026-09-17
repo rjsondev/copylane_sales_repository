@@ -1,11 +1,11 @@
-﻿using CopylaneSalesInventory.Application.Common.Interfaces;
+﻿using CopylaneSalesInventory.Application.Common.Exceptions;
+using CopylaneSalesInventory.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace CopylaneSalesInventory.Application.Products.Commands.SetProductStatus;
 
-public sealed class SetProductStatusHandler
-    : IRequestHandler<SetProductStatusCommand>
+public sealed class SetProductStatusHandler : IRequestHandler<SetProductStatusCommand>
 {
     private readonly IApplicationDbContext _dbContext;
 
@@ -22,8 +22,7 @@ public sealed class SetProductStatusHandler
 
         if (product is null)
         {
-            throw new KeyNotFoundException(
-                $"Product {request.Id} was not found.");
+            throw new NotFoundException($"Product {request.Id} was not found.");
         }
 
         product.IsActive = request.IsActive;
