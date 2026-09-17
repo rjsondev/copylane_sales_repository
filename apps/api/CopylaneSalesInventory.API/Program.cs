@@ -1,4 +1,5 @@
 using CopylaneSalesInventory.API.Features.Products;
+using CopylaneSalesInventory.API.Middleware;
 using CopylaneSalesInventory.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,10 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 // # Register commands and queries with MediatR
 builder.Services.AddMediatR();
+
+// # Register the global exception handler and problem details middleware
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
