@@ -1,4 +1,5 @@
-﻿using CopylaneSalesInventory.Application.Common.Interfaces;
+﻿using CopylaneSalesInventory.Application.Common.Exceptions;
+using CopylaneSalesInventory.Application.Common.Interfaces;
 using CopylaneSalesInventory.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +21,7 @@ public sealed class CreateProductHandler : IRequestHandler<CreateProductCommand,
 
         if (exists)
         {
-            throw new InvalidOperationException(
-                $"Product SKU '{request.Sku}' already exists.");
+            throw new ConflictException($"Product SKU '{request.Sku}' already exists.");
         }
 
         var product = new Product
