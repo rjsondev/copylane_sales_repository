@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using CopylaneSalesInventory.Application.Common.Exceptions;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,20 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
                 problemDetails.Status = StatusCodes.Status409Conflict;
                 problemDetails.Title = "Operation failed";
                 problemDetails.Detail = exception.Message;
+                break;
+
+            case NotFoundException:
+                problemDetails.Status = 404;
+                problemDetails.Title = "Resource not found";
+                problemDetails.Detail = exception.Message;
+
+                break;
+
+            case ConflictException:
+                problemDetails.Status = 409;
+                problemDetails.Title = "Conflict";
+                problemDetails.Detail = exception.Message;
+
                 break;
 
             default:
