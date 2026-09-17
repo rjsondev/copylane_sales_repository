@@ -13,13 +13,14 @@ namespace CopylaneSalesInventory.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            // Add the database context to the service collection
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-
             services.AddDbContext<AppDBContext>(options =>
             {
                 options.UseSqlServer(connectionString);
             });
 
+            // Register the IApplicationDbContext interface with the AppDBContext implementation
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<AppDBContext>());
 
             return services;
