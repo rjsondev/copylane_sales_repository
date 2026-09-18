@@ -27,9 +27,9 @@ namespace CopylaneSalesInventory.Infrastructure
             return services;
         }
 
-        public static IServiceCollection AddMediatR(this IServiceCollection services)
+        public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddValidatorsFromAssembly(typeof(CreateProductCommand).Assembly);
+            services.AddValidatorsFromAssembly(typeof(AssemblyMarker).Assembly);
 
             services.AddMediatR(config =>
             {
