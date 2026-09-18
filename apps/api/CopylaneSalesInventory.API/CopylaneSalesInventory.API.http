@@ -31,10 +31,10 @@ Content-Type: application/json
 }
 
 ### Change Product Status
-PATCH {{CopylaneSalesInventory.API_HostAddress}}/api/product/1/status
+PATCH {{CopylaneSalesInventory.API_HostAddress}}/api/product/3/status
 Content-Type: application/json
 {
-  "id": 1,
+  "id": 3,
   "isactive": false,
   "modifiedbyid": 2
 }
