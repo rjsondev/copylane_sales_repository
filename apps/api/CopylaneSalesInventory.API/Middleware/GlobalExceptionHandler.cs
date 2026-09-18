@@ -29,7 +29,6 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
                 problemDetails.Status = StatusCodes.Status400BadRequest;
                 problemDetails.Title = "Validation failed";
                 problemDetails.Detail ="One or more validation errors occurred.";
-
                 problemDetails.Extensions["errors"] =
                     validationException.Errors
                         .GroupBy(x => x.PropertyName)
