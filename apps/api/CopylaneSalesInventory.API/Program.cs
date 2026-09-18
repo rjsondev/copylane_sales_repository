@@ -12,7 +12,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // # Register commands and queries with MediatR
-builder.Services.AddMediatR();
+builder.Services.AddApplication();
 
 // # Register the global exception handler and problem details middleware
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
