@@ -1,4 +1,5 @@
-﻿using CopylaneSalesInventory.Application.Common.Behaviors;
+﻿using CopylaneSalesInventory.Application;
+using CopylaneSalesInventory.Application.Common.Behaviors;
 using CopylaneSalesInventory.Application.Common.Interfaces;
 using CopylaneSalesInventory.Application.Products.Commands.CreateProduct;
 using CopylaneSalesInventory.Infrastructure.Persistence;
@@ -32,7 +33,7 @@ namespace CopylaneSalesInventory.Infrastructure
 
             services.AddMediatR(config =>
             {
-                config.RegisterServicesFromAssembly(typeof(CreateProductCommand).Assembly);
+                config.RegisterServicesFromAssembly(typeof(AssemblyMarker).Assembly);
 
                 config.AddOpenBehavior(typeof(ValidationBehavior<,>));
             });
